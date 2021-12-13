@@ -5,7 +5,7 @@ void base_tower::Draw(){
     DrawTextureEx(texture,position,rotation,scale,WHITE);
 
 }
-void base_tower::Update(){ 
-    
+void base_tower::Update(float deltaTime){ 
+
 
 }

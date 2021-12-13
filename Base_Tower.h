@@ -12,7 +12,7 @@ public:
     Enemy getTarget() { return *target; }
     bool getIsClicked() { return isClicked; }
     base_tower(Texture2D texture);
-    void Update();
+    void Update(float deltaTime);
     void Draw();
 private:
     Texture2D texture{};
