@@ -6,6 +6,7 @@ Enemy:: Enemy():
     speed{100},
     health{1}
     {
+        collisionRect={static_cast<float>(texture.width),static_cast<float>(texture.height)};
 }
 
 void Enemy::Update(float deltaTime){
@@ -29,5 +30,7 @@ void Enemy::CalculateDirection(int index){
 }
 
 void Enemy::Draw() {
-    DrawRectangle(position.x, position.y, 25, 25, RED);
+    //todo texture width and height replace
+    DrawRectangle(position.x+20, position.y+20, 25, 25, RED);
+    
 }

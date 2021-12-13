@@ -1,7 +1,9 @@
 #include "raylib.h"
 #include "enemy.h"
 #include "Base_Tower.h"
-
+#include <vector>
+#include "bullet.h"
+using namespace std;
 int main()
 {
     InitWindow(1024, 768, "TowerDefense");
@@ -9,10 +11,14 @@ int main()
     Texture2D towerTexture = LoadTexture("textures/tower.png");
     const int scale = 2;
     const float rotation{0};
-    const Vector2 position{0,0};
+    const Vector2 Map_position{0, 0};
     float deltaTime;
-    base_tower towerTest{towerTexture, {0, 0}};
-    Enemy enemy{};
+    base_tower towerTest{towerTexture, {128, 128}};
+    vector<Enemy *> enemies;
+    vector<base_tower *> towers;
+    towers.push_back(new base_tower(towerTest));
+    float spawnTimer{0};
+    int spawnCount{0};
 
     SetTargetFPS(60);
     while (!WindowShouldClose())
@@ -20,13 +26,38 @@ int main()
         deltaTime = GetFrameTime();
         BeginDrawing();
         ClearBackground(WHITE);
-        DrawTextureEx(WorldMap, position,rotation, scale, WHITE);
+        DrawTextureEx(WorldMap, Map_position, rotation, scale, WHITE);
+        spawnTimer += deltaTime;
+        if (spawnTimer >= 1 && spawnCount < 6)
+        {
+            spawnTimer = 0;
+            enemies.push_back(new Enemy());
+            spawnCount++;
+        }
 
-        enemy.Update(deltaTime);
-        enemy.Draw();
+        for (auto enemy : enemies)
+        {
+            enemy->Update(deltaTime);
+            enemy->Draw();
+        }
+        for (auto tower : towers)
+        {
+            bool hasTarget{};
 
-        towerTest.Update(deltaTime);
-        towerTest.Draw();
+            for (auto enemy : enemies)
+            {
+
+                if (CheckCollisionCircleRec(tower->getPosition(), tower->getRange(), enemy->getCollisionRect()) && !hasTarget)
+                {
+                    tower->setTarget(*enemy);
+                    hasTarget = true;
+                }
+            }
+
+            tower->Update(deltaTime);
+            tower->Draw();
+        }
+        
 
         EndDrawing();
     }

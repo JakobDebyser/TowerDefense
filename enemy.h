@@ -12,11 +12,12 @@ public:
     Vector2 getDestination() { return currentDestination; }
     void Update(float deltaTime);
     void Draw();
-
+    Rectangle getCollisionRect(){return collisionRect;};
 private:
     Texture2D texture{};
     Vector2 position{};
     Vector2 direction{};
+    Rectangle collisionRect{};
     int speed{};
     int health{};
     Vector2 currentDestination{};

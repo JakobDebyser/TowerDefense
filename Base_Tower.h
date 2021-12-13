@@ -2,18 +2,22 @@
 #define _BASE_TOWER_H_
 #include "raylib.h"
 #include "enemy.h"
+#include <vector>
+#include "bullet.h"
+using namespace std;
 class base_tower
 {
 public:
-    
     int getRange() { return range; }
     int getPower() { return power; }
     Vector2 getPosition() { return position; }
     Enemy getTarget() { return *target; }
+    void setTarget(Enemy enemy);
     bool getIsClicked() { return isClicked; }
     base_tower(Texture2D texture, Vector2 position);
     void Update(float deltaTime);
     void Draw();
+
 private:
     Texture2D texture{};
     int range{};
