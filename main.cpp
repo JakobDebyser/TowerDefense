@@ -1,4 +1,5 @@
 #include "raylib.h"
+#include "enemy.h"
 
 int main()
 {
