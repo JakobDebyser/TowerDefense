@@ -9,3 +9,9 @@ void base_tower::Update(float deltaTime){
 
 
 }
+
+base_tower:: base_tower(Texture2D tex, Vector2 pos){
+    texture = tex;
+    position = pos;
+
+}

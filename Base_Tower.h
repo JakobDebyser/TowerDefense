@@ -11,7 +11,7 @@ public:
     Vector2 getPosition() { return position; }
     Enemy getTarget() { return *target; }
     bool getIsClicked() { return isClicked; }
-    base_tower(Texture2D texture);
+    base_tower(Texture2D texture, Vector2 position);
     void Update(float deltaTime);
     void Draw();
 private:
