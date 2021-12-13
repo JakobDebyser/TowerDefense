@@ -8,6 +8,8 @@ public:
     int getSpeed() { return speed; }
     int getHealth() { return health; }
     Vector2 getDestination() { return destination; }
+    void Update(float deltaTime);
+    void Draw();
 
 private:
     Texture2D texture{};
