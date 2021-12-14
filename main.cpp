@@ -4,17 +4,20 @@
 #include <vector>
 #include "bullet.h"
 #include "start_button.h"
-#include "button.h"
+#include "tower_button.h"
 
 using namespace std;
 int main()
 {
+
+    //TODO: variabelen in juiste/logische volgorde zetten
     float window_Width{1024};
     float window_Height{768};
     InitWindow(window_Width, window_Height, "TowerDefense");
     Texture2D WorldMap = LoadTexture("textures/testmap.png");
     Texture2D towerTexture = LoadTexture("textures/tower.png");
     Texture2D NextWave = LoadTexture("textures/nextWave.png");
+    Texture2D basicTowerButtonTexture = LoadTexture("textures/nextWave.png"); //texture vervangen
     const int scale = 2;
     const float rotation{0};
     const Vector2 Map_position{0, 0};
@@ -23,9 +26,12 @@ int main()
     vector<Enemy *> enemies;
     vector<base_tower *> towers;
     start_button start{NextWave, {840, 64}};
+    TowerButton basicTower{basicTowerButtonTexture, {840, 128}};
+
     towers.push_back(new base_tower(towerTest));
     float spawnTimer{0};
     int spawnCount{0};
+    bool spawningEnemies{};
 
     SetTargetFPS(60);
     while (!WindowShouldClose())
@@ -36,12 +42,21 @@ int main()
         DrawTextureEx(WorldMap, Map_position, rotation, scale, WHITE);
         if (start.isClicked())
         {
+            spawningEnemies = true;
+            spawnCount = 0;
+        }
+        if (spawningEnemies)
+        {
             spawnTimer += deltaTime;
             if (spawnTimer >= 1 && spawnCount < 6)
             {
                 spawnTimer = 0;
                 enemies.push_back(new Enemy());
                 spawnCount++;
+                if (spawnCount >= 6)
+                {
+                    spawningEnemies = false;
+                }
             }
         }
 
@@ -84,13 +99,18 @@ int main()
             tower->Update(deltaTime, window_Width, window_Height);
             tower->Draw();
         }
+
+        //MENU
+
         start.Draw();
+        basicTower.Draw();
 
         EndDrawing();
     }
     UnloadTexture(WorldMap);
     UnloadTexture(towerTexture);
     UnloadTexture(NextWave);
+    UnloadTexture(basicTowerButtonTexture);
 
     return 0;
 }

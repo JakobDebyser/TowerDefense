@@ -15,6 +15,7 @@ protected:
     Vector2 position;
     int scale{2};
     Rectangle collisionRect;
+    bool clicked{};
 };
 
 #endif
