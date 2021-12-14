@@ -12,6 +12,7 @@ public:
     int getPower() { return power; }
     Vector2 getPosition() { return position; }
     Enemy* getTarget() { return target; }
+    bool getHasTarget(){return hasTarget;}
     void setTarget(Enemy* enemy);
     void setHasTarget(bool target);
     bool getIsClicked() { return isClicked; }

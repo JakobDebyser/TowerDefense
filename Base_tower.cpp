@@ -31,6 +31,7 @@ void base_tower::Update(float deltaTime)
     {
 
         bullet->Update(deltaTime);
+        
     }
 }
 
