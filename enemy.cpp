@@ -11,6 +11,7 @@ Enemy:: Enemy():
 }
 
 void Enemy::Update(float deltaTime){
+    
     collisionRect={position.x, position.y, 25.f, 25.f};
 
     CalculateDirection(waypointIndex);
@@ -36,4 +37,11 @@ void Enemy::Draw() {
     //todo texture width and height replace
     DrawRectangle(position.x+20, position.y+20, 25, 25, RED);
     
+}
+void Enemy::takeDamage(int damage){
+
+    health-=damage;
+    if(health<=0){
+        Alive=false;
+    }
 }

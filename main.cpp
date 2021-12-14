@@ -6,7 +6,9 @@
 using namespace std;
 int main()
 {
-    InitWindow(1024, 768, "TowerDefense");
+    float window_Width{1024};
+    float window_Height{768};
+    InitWindow(window_Width, window_Height, "TowerDefense");
     Texture2D WorldMap = LoadTexture("textures/testmap.png");
     Texture2D towerTexture = LoadTexture("textures/tower.png");
     const int scale = 2;
@@ -34,23 +36,29 @@ int main()
             enemies.push_back(new Enemy());
             spawnCount++;
         }
-
+        int EnemyIndex{0};
         for (auto enemy : enemies)
         {
-            enemy->Update(deltaTime);
-            enemy->Draw();
+            
+            if(enemy->IsAlive()){
+                enemy->Update(deltaTime);
+                enemy->Draw();
+            }else{
+                enemies.erase(enemies.begin() + EnemyIndex);
+            }
+            EnemyIndex ++;
         }
         for (auto tower : towers)
         {
 
-            
             for (auto enemy : enemies)
             {
 
-                if (CheckCollisionCircleRec(tower->getPosition(), tower->getRange(), enemy->getCollisionRect()) && !tower->getHasTarget())
+                if (CheckCollisionCircleRec(tower->getPosition(), tower->getRange(), enemy->getCollisionRect()) && !tower->getHasTarget()&& enemy->IsAlive())
                 {
                     tower->setTarget(enemy);
                     tower->setHasTarget(true);
+
                 }
             }
             if (tower->getHasTarget())
@@ -62,12 +70,14 @@ int main()
                 }
             }
 
-            tower->Update(deltaTime);
+            tower->Update(deltaTime,window_Width,window_Height);
             tower->Draw();
         }
 
         EndDrawing();
     }
+    UnloadTexture(WorldMap);
+    UnloadTexture(towerTexture);
 
     return 0;
 }

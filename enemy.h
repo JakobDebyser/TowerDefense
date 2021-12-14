@@ -13,6 +13,8 @@ public:
     void Update(float deltaTime);
     void Draw();
     Rectangle getCollisionRect(){return collisionRect;};
+    void takeDamage(int damage);
+    bool IsAlive(){return Alive;}
 private:
     Texture2D texture{};
     Vector2 position{};
@@ -24,6 +26,7 @@ private:
     Vector2 waypoints[8] = {{64,576}, {256,576}, {256,640}, {576,640}, {576,384}, {320,384}, {320,128}, {640,128}};
     void CalculateDirection(int index);
     int waypointIndex{0};
+    bool Alive{true};
 };
 
 #endif // _ENEMY_
