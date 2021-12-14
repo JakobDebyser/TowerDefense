@@ -32,9 +32,13 @@ void base_tower::Update(float deltaTime,float window_Width,float window_Height)
     {
 
         bullet->Update(deltaTime);
-        if(CheckCollisionCircleRec(position,5.f,bullet->GetTarget()->getCollisionRect())){
+        if(CheckCollisionCircleRec(bullet->GetPosition(),5.f,bullet->GetTarget()->getCollisionRect())){
             bullet->GetTarget()->takeDamage(power);
             bullets.erase(bullets.begin()+bulletIndex);
+            if(!bullet->GetTarget()->IsAlive()){
+                target={};
+                hasTarget=false;
+            }
         }
         if(bullet->GetPosition().x<0 || bullet->GetPosition().y<0 || bullet->GetPosition().x>window_Width ||bullet->GetPosition().y>window_Height){
             bullets.erase(bullets.begin()+bulletIndex);
