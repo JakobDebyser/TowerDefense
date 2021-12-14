@@ -6,10 +6,13 @@ Enemy:: Enemy():
     speed{100},
     health{1}
     {
-        collisionRect={static_cast<float>(texture.width),static_cast<float>(texture.height)};
+        //collisionRect={static_cast<float>(texture.width),static_cast<float>(texture.height)};
+        collisionRect={position.x, position.y, 25.f, 25.f};
 }
 
 void Enemy::Update(float deltaTime){
+    collisionRect={position.x, position.y, 25.f, 25.f};
+
     CalculateDirection(waypointIndex);
     direction = Vector2Scale(direction, speed * deltaTime);
     position = Vector2Add(position, direction);

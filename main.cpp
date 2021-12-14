@@ -28,7 +28,7 @@ int main()
         ClearBackground(WHITE);
         DrawTextureEx(WorldMap, Map_position, rotation, scale, WHITE);
         spawnTimer += deltaTime;
-        if (spawnTimer >= 1 && spawnCount < 6)
+        if (spawnTimer >= 1 && spawnCount < 1)
         {
             spawnTimer = 0;
             enemies.push_back(new Enemy());
@@ -42,22 +42,31 @@ int main()
         }
         for (auto tower : towers)
         {
-            bool hasTarget{};
 
+            bool hasTarget{};
             for (auto enemy : enemies)
             {
 
                 if (CheckCollisionCircleRec(tower->getPosition(), tower->getRange(), enemy->getCollisionRect()) && !hasTarget)
                 {
-                    tower->setTarget(*enemy);
+                    tower->setTarget(enemy);
+                    tower->setHasTarget(true);
                     hasTarget = true;
+                }
+            }
+            if (hasTarget)
+            {
+                if (CheckCollisionCircleRec(tower->getPosition(), tower->getRange(), tower->getTarget()->getCollisionRect()))
+                {
+                    tower->setTarget({});
+                    tower->setHasTarget(false);
+                    hasTarget = false;
                 }
             }
 
             tower->Update(deltaTime);
             tower->Draw();
         }
-        
 
         EndDrawing();
     }

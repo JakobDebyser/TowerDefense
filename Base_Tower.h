@@ -11,8 +11,9 @@ public:
     int getRange() { return range; }
     int getPower() { return power; }
     Vector2 getPosition() { return position; }
-    Enemy getTarget() { return *target; }
-    void setTarget(Enemy enemy);
+    Enemy* getTarget() { return target; }
+    void setTarget(Enemy* enemy);
+    void setHasTarget(bool target);
     bool getIsClicked() { return isClicked; }
     base_tower(Texture2D texture, Vector2 position);
     void Update(float deltaTime);
@@ -23,10 +24,13 @@ private:
     int range{};
     int power{};
     Vector2 position{};
-    Enemy *target{};
+    Enemy* target{};
     bool isClicked{};
     float rotation{0};
     float scale{2};
+    vector<Bullet*> bullets;
+    bool hasTarget{};
+    float bulletTimer{0.0f};
 };
 
 #endif // _BASE_TOWER_H_
