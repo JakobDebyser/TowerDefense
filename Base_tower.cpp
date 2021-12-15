@@ -7,7 +7,10 @@ using namespace std;
 void base_tower::Draw()
 {
     DrawTextureEx(texture, position, rotation, scale, WHITE);
-    DrawCircleLines(position.x + 32, position.y + 32, range, YELLOW);
+    if (isClicked)
+    {
+        DrawCircleLines(position.x + 32, position.y + 32, range, YELLOW);
+    }
 
     for (auto bullet : bullets)
     {
@@ -17,6 +20,18 @@ void base_tower::Draw()
 }
 void base_tower::Update(float deltaTime, float window_Width, float window_Height)
 {
+    if (IsMouseButtonPressed(0))
+    {
+        if (CheckCollisionPointRec(GetMousePosition(), {position.x, position.y, static_cast<float>(texture.width * 2), static_cast<float>(texture.height * 2)}))
+        {
+            isClicked = true;
+        }
+        else
+        {
+            isClicked = false;
+        }
+    }
+
     bulletTimer += deltaTime;
     if (hasTarget)
     {

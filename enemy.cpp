@@ -1,9 +1,11 @@
 #include "enemy.h"
 #include "raymath.h"
+#include <math.h>
 
 Enemy::Enemy() : position{64, -64},
                  speed{100},
-                 health{1}
+                 health{5},
+                 maxHealth{5}
 {
     //collisionRect={static_cast<float>(texture.width),static_cast<float>(texture.height)};
     collisionRect = {position.x, position.y, 25.f, 25.f};
@@ -40,6 +42,8 @@ void Enemy::Draw()
 {
     //todo texture width and height replace
     DrawRectangle(position.x + 20, position.y + 20, 25, 25, RED);
+    DrawRectangle(position.x + 20, position.y + 5, 25, 5, RED);
+    DrawRectangle(position.x + 20, position.y + 5, health *25 /maxHealth, 5, GREEN);
 }
 void Enemy::takeDamage(int damage)
 {

@@ -23,6 +23,7 @@ private:
     Rectangle collisionRect{};
     int speed{};
     int health{};
+    int maxHealth{};
     Vector2 currentDestination{};
     Vector2 waypoints[8] = {{64, 576}, {256, 576}, {256, 640}, {576, 640}, {576, 384}, {320, 384}, {320, 128}, {640, 128}};
     void CalculateDirection(int index);

@@ -25,14 +25,13 @@ int main()
     const float rotation{0};
     const Vector2 Map_position{0, 0};
     float deltaTime;
-    base_tower towerTest{towerTexture, {128, 128}};
     vector<Enemy *> enemies;
     vector<base_tower *> towers;
     start_button start{NextWave, {840, 64}};
     TowerButton basicTower{basicTowerButtonTexture, {840, 128}};
     MouseObject mouseObject{};
     Tile tiles[12][12];
-    towers.push_back(new base_tower(towerTest));
+    
     float spawnTimer{0};
     int spawnCount{0};
     bool spawningEnemies{};
@@ -140,7 +139,7 @@ int main()
                 }
                 if (tower->getHasTarget())
                 {
-                    if (!CheckCollisionCircleRec(tower->getPosition(), tower->getRange(), tower->getTarget()->getCollisionRect()) && !tower->getTarget()->IsAlive())
+                    if (!CheckCollisionCircleRec(tower->getPosition(), tower->getRange(), tower->getTarget()->getCollisionRect()) || !tower->getTarget()->IsAlive())
                     {
                         tower->setTarget({});
                         tower->setHasTarget(false);
