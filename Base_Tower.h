@@ -16,6 +16,7 @@ public:
     void setTarget(Enemy* enemy);
     void setHasTarget(bool target);
     bool getIsClicked() { return isClicked; }
+    base_tower(Vector2 position);
     base_tower(Texture2D texture, Vector2 position);
     void Update(float deltaTime,float window_Width,float window_Height);
     void Draw();
