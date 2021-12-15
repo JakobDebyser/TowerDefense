@@ -6,7 +6,7 @@ MouseObject::MouseObject()
     status = status.IDLE;
 }
 
-void MouseObject::Update(float deltaTime, Tile tiles[12][12], vector<base_tower *> *towers)
+void MouseObject::Update(float deltaTime, Tile tiles[12][12], vector<base_tower *>& towers)
 {
     switch (status.value())
     {
@@ -17,7 +17,8 @@ void MouseObject::Update(float deltaTime, Tile tiles[12][12], vector<base_tower 
             if (tiles[(int)getMouseTile().x][(int)getMouseTile().y].getName() == grass)
             {
                 // build towerTexture
-                towers->push_back(new base_tower(getMouseTile()));
+                towers.push_back(new base_tower({getMouseTile().x*64, getMouseTile().y*64}));
+                tiles[(int)getMouseTile().x][(int)getMouseTile().y].setName("tower");
             }
         }
         break;
