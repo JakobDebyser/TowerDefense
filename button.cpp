@@ -9,8 +9,8 @@ Button::Button(Texture2D tex, Vector2 pos)
       position{pos}, collisionRect{
                          position.x,
                          position.y,
-                         static_cast<float>(tex.width),
-                         static_cast<float>(tex.height)}
+                         static_cast<float>(tex.width)*2,
+                         static_cast<float>(tex.height)*2}
 {
 }
 bool Button::isClicked()

@@ -5,6 +5,8 @@
 #include "bullet.h"
 #include "start_button.h"
 #include "tower_button.h"
+#include"mouseObject.h"
+#include"mouseStatus.h"
 
 using namespace std;
 int main()
@@ -27,6 +29,7 @@ int main()
     vector<base_tower *> towers;
     start_button start{NextWave, {840, 64}};
     TowerButton basicTower{basicTowerButtonTexture, {840, 128}};
+    MouseObject mouseObject{};
 
     towers.push_back(new base_tower(towerTest));
     float spawnTimer{0};
@@ -101,9 +104,16 @@ int main()
         }
 
         //MENU
+        if(basicTower.isClicked()){
+            mouseObject.setStatus(mouseStatus::BUILDING_BASIC_TOWER);
+        }
+
 
         start.Draw();
         basicTower.Draw();
+
+        mouseObject.Update(deltaTime);
+        mouseObject.Draw();
 
         EndDrawing();
     }
