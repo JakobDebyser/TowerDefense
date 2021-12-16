@@ -4,7 +4,6 @@
 #include "button.h"
 #include "mouseStatus.h"
 #include"Base_Tower.h"
-using namespace std;
 
 class TowerButton : public Button
 {

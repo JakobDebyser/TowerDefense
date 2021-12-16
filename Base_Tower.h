@@ -5,8 +5,6 @@
 #include <vector>
 #include "bullet.h"
 #include"Upgrade_Button.h"
-#include "mouseObject.h"
-using namespace std;
 class base_tower
 {
 public:

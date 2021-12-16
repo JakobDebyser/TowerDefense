@@ -5,7 +5,6 @@
 #include "raymath.h"
 #include<string>
 #include "mouseStatus.h"
-using namespace std;
 void base_tower::Draw()
 {
     DrawTextureEx(texture, position, rotation, scale, WHITE);

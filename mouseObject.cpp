@@ -6,7 +6,7 @@ MouseObject::MouseObject()
     status = status.IDLE;
 }
 
-void MouseObject::Update(float deltaTime, Tile tiles[12][12], vector<base_tower *>& towers,int &funds)
+void MouseObject::Update(float deltaTime, Tile tiles[12][12],vector<base_tower *>& towers,int &funds)
 {
     switch (status.value())
     {
@@ -25,7 +25,7 @@ void MouseObject::Update(float deltaTime, Tile tiles[12][12], vector<base_tower 
         break;
 
     default:
-        
+
         break;
     }
 
