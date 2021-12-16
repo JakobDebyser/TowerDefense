@@ -92,14 +92,14 @@ int main()
             EndDrawing();
             continue;
         }
-
+        /*
         for (int x{0}; x < 12; x++)
         {
             for (int y{0}; y < 12; y++)
             {
                 tiles[x][y].Draw();
             }
-        }
+        }*/
         if (start.isClicked())
         {
             text_timer = 0;
