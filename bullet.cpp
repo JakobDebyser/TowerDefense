@@ -4,7 +4,7 @@ Bullet::Bullet(Vector2 pos, Vector2 dir, Enemy *tar)
 {
     position = pos;
     direction = dir;
-    speed = 500.0f;
+    speed = 600.0f;
     target = tar;
 }
 
@@ -17,6 +17,6 @@ void Bullet::Update(float deltaTime)
 
 void Bullet::Draw()
 {
-    DrawCircle(position.x + 32, position.y + 32, 5, BLACK);
+    DrawCircle(position.x+30, position.y+30, 5, BLACK);
     // LoadTexture();
 }

@@ -79,6 +79,9 @@ int main()
         tiles[x][2].setName("road");
     }
     tiles[10][2].setName("base");
+    tiles[11][2].setName("road");
+    tiles[11][1].setName("road");
+    tiles[11][3].setName("road");
 
     SetTargetFPS(60);
     while (!WindowShouldClose())
