@@ -9,7 +9,8 @@
 #include "mouseStatus.h"
 #include "Tile.h"
 #include <string>
-using namespace std;
+using std::string;
+using std::vector;
 int main()
 {
 
