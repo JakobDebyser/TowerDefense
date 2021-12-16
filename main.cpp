@@ -16,6 +16,9 @@ int main()
     // TODO: variabelen in juiste/logische volgorde zetten
     float window_Width{1024};
     float window_Height{768};
+    int funds{100};
+    int max_lives{5};
+    int current_lives = max_lives;
     InitWindow(window_Width, window_Height, "TowerDefense");
     Texture2D WorldMap = LoadTexture("textures/testmap.png");
     Texture2D towerTexture = LoadTexture("textures/tower.png");
@@ -25,16 +28,18 @@ int main()
     const float rotation{0};
     const Vector2 Map_position{0, 0};
     float deltaTime;
+    int difficultyLevel{0};
     vector<Enemy *> enemies;
     vector<base_tower *> towers;
     start_button start{NextWave, {840, 64}};
     TowerButton basicTower{basicTowerButtonTexture, {840, 128}};
     MouseObject mouseObject{};
     Tile tiles[12][12];
-    
+    bool showLevel{};
     float spawnTimer{0};
     int spawnCount{0};
     bool spawningEnemies{};
+    float text_timer{0};
     for (int x{0}; x < 12; x++)
     {
         for (int y{0}; y < 12; y++)
@@ -81,6 +86,13 @@ int main()
         BeginDrawing();
         ClearBackground(WHITE);
         DrawTextureEx(WorldMap, Map_position, rotation, scale, WHITE);
+        if (current_lives <= 0)
+        {
+            DrawText("Game over!", 256, 192, 128, RED);
+            EndDrawing();
+            continue;
+        }
+
         for (int x{0}; x < 12; x++)
         {
             for (int y{0}; y < 12; y++)
@@ -90,8 +102,22 @@ int main()
         }
         if (start.isClicked())
         {
+            text_timer = 0;
+            showLevel = true;
             spawningEnemies = true;
             spawnCount = 0;
+            difficultyLevel++;
+        }
+        if (showLevel)
+        {
+
+            text_timer += deltaTime;
+            if (text_timer < 1)
+            {
+                string difficulty_string{"Level: "};
+                difficulty_string.append(to_string(difficultyLevel), 0, 3);
+                DrawText(difficulty_string.c_str(), 4 * 64, 4 * 64, 40, BLUE);
+            }
         }
         if (spawningEnemies)
         {
@@ -104,6 +130,7 @@ int main()
                 if (spawnCount >= 6)
                 {
                     spawningEnemies = false;
+                    difficultyLevel++;
                 }
             }
         }
@@ -114,7 +141,7 @@ int main()
 
             if (enemy->IsAlive())
             {
-                enemy->Update(deltaTime);
+                enemy->Update(deltaTime, current_lives);
                 enemy->Draw();
             }
             else
@@ -146,22 +173,33 @@ int main()
                     }
                 }
 
-                tower->Update(deltaTime, window_Width, window_Height);
+                tower->Update(deltaTime, window_Width, window_Height, funds);
                 tower->Draw();
             }
         }
 
         // MENU
-        if (basicTower.isClicked())
+        if (funds >= basicTower.getTowerCost() && funds > 0)
         {
-            mouseObject.setStatus(mouseStatus::BUILDING_BASIC_TOWER);
+            if (basicTower.isClicked())
+            {
+                mouseObject.setStatus(mouseStatus::BUILDING_BASIC_TOWER);
+            }
         }
 
         start.Draw();
         basicTower.Draw();
 
-        mouseObject.Update(deltaTime, tiles, towers);
+        mouseObject.Update(deltaTime, tiles, towers, funds);
         mouseObject.Draw();
+        string funds_string{"Funds: "};
+        funds_string.append(to_string(funds), 0, 5);
+        DrawText(funds_string.c_str(), 770, 268, 40, BLACK);
+        string lives_string{"Lives: "};
+        lives_string.append(to_string(current_lives), 0, 3);
+        lives_string.append(" / ");
+        lives_string.append(to_string(max_lives), 0, 3);
+        DrawText(lives_string.c_str(), 770, 12, 40, BLACK);
 
         EndDrawing();
     }

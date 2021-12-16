@@ -6,12 +6,12 @@ MouseObject::MouseObject()
     status = status.IDLE;
 }
 
-void MouseObject::Update(float deltaTime, Tile tiles[12][12], vector<base_tower *>& towers)
+void MouseObject::Update(float deltaTime, Tile tiles[12][12], vector<base_tower *>& towers,int &funds)
 {
     switch (status.value())
     {
     case 0: // BUILDING BASIC TOWER
-        if (IsMouseButtonPressed(0)&& getMouseTile().x<12)
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)&& getMouseTile().x<12&&funds>0)
         {
             string grass = "grass";
             if (tiles[(int)getMouseTile().x][(int)getMouseTile().y].getName() == grass)
@@ -19,15 +19,17 @@ void MouseObject::Update(float deltaTime, Tile tiles[12][12], vector<base_tower 
                 // build towerTexture
                 towers.push_back(new base_tower({getMouseTile().x*64, getMouseTile().y*64}));
                 tiles[(int)getMouseTile().x][(int)getMouseTile().y].setName("tower");
+                funds-=20;//tower cost
             }
         }
         break;
 
     default:
+        
         break;
     }
 
-    if (IsMouseButtonPressed(1))
+    if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT))
     {
         status = status.IDLE;
     }

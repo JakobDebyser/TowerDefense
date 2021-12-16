@@ -3,6 +3,8 @@
 #include <vector>
 #include "bullet.h"
 #include "raymath.h"
+#include<string>
+#include "mouseStatus.h"
 using namespace std;
 void base_tower::Draw()
 {
@@ -10,25 +12,35 @@ void base_tower::Draw()
     if (isClicked)
     {
         DrawCircleLines(position.x + 32, position.y + 32, range, YELLOW);
-    }
+        string tower_range {"Range: "};
+        tower_range.append(to_string(range),0,5);
+        DrawText(tower_range.c_str(),770,588,40,BLACK);
+        string tower_power {"Power: "};
+        tower_power.append(to_string(power),0,5);
+        DrawText(tower_power.c_str(),770,652,40,BLACK);
+        upgrade_button.Draw();
 
+    }
+    
     for (auto bullet : bullets)
     {
 
         bullet->Draw();
     }
 }
-void base_tower::Update(float deltaTime, float window_Width, float window_Height)
+void base_tower::Update(float deltaTime, float window_Width, float window_Height,int &funds)
 {
-    if (IsMouseButtonPressed(0))
+    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
     {
         if (CheckCollisionPointRec(GetMousePosition(), {position.x, position.y, static_cast<float>(texture.width * 2), static_cast<float>(texture.height * 2)}))
         {
             isClicked = true;
+            
         }
         else
         {
             isClicked = false;
+            
         }
     }
 
@@ -55,9 +67,11 @@ void base_tower::Update(float deltaTime, float window_Width, float window_Height
             {
                 target = {};
                 hasTarget = false;
+                funds+=10;
+
             }
         }
-        if (bullet->GetPosition().x < 0 || bullet->GetPosition().y < 0 || bullet->GetPosition().x > window_Width || bullet->GetPosition().y > window_Height)
+        if (bullet->GetPosition().x < 0 || bullet->GetPosition().y < 0 || bullet->GetPosition().x > window_Width || bullet->GetPosition().y > window_Height-4*64)
         {
             bullets.erase(bullets.begin() + bulletIndex);
         }

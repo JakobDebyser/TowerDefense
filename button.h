@@ -5,7 +5,7 @@
 class Button
 {
 public:
-    Button(Texture2D texture, Vector2 position);
+    Button(Texture2D texture={}, Vector2 position={});
     bool isClicked();
     void Draw();
     int getScale() { return scale; }

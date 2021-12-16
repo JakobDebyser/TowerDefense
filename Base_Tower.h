@@ -4,6 +4,8 @@
 #include "enemy.h"
 #include <vector>
 #include "bullet.h"
+#include"Upgrade_Button.h"
+#include "mouseObject.h"
 using namespace std;
 class base_tower
 {
@@ -18,9 +20,10 @@ public:
     bool getIsClicked() { return isClicked; }
     base_tower(Vector2 position);
     base_tower(Texture2D texture, Vector2 position);
-    void Update(float deltaTime,float window_Width,float window_Height);
+    void Update(float deltaTime,float window_Width,float window_Height, int &funds);
     void Draw();
-
+    Upgrade_Button getUpgradeButton() { return upgrade_button; }
+    int getCost() { return cost; }
 private:
     Texture2D texture{};
     int range{};
@@ -33,6 +36,9 @@ private:
     vector<Bullet*> bullets;
     bool hasTarget{};
     float bulletTimer{0.0f};
+    Upgrade_Button upgrade_button{};
+    int cost{20};
+    
 };
 
 #endif // _BASE_TOWER_H_

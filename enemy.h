@@ -10,7 +10,7 @@ public:
     int getSpeed() { return speed; }
     int getHealth() { return health; }
     Vector2 getDestination() { return currentDestination; }
-    void Update(float deltaTime);
+    void Update(float deltaTime,int &lives);
     void Draw();
     Rectangle getCollisionRect() { return collisionRect; };
     void takeDamage(int damage);
