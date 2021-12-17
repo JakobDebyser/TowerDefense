@@ -5,6 +5,7 @@
 #include "raymath.h"
 #include<string>
 #include "mouseStatus.h"
+
 void base_tower::Draw()
 {
     DrawTextureEx(texture, position, rotation, scale, WHITE);
@@ -27,9 +28,9 @@ void base_tower::Draw()
         bullet->Draw();
     }
 }
-void base_tower::Update(float deltaTime, float window_Width, float window_Height,int &funds)
+void base_tower::Update(float deltaTime, float window_Width, float window_Height,int &funds,mouseStatus status)
 {
-    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)&& status == mouseStatus::IDLE)
     {
         if (CheckCollisionPointRec(GetMousePosition(), {position.x, position.y, static_cast<float>(texture.width * 2), static_cast<float>(texture.height * 2)}))
         {

@@ -17,9 +17,10 @@ void MouseObject::Update(float deltaTime, Tile tiles[12][12],vector<base_tower *
             if (tiles[(int)getMouseTile().x][(int)getMouseTile().y].getName() == grass)
             {
                 // build towerTexture
-                towers.push_back(new base_tower({getMouseTile().x*64, getMouseTile().y*64}));
+                base_tower *tower = new base_tower({getMouseTile().x*64, getMouseTile().y*64});
+                towers.push_back(tower);
                 tiles[(int)getMouseTile().x][(int)getMouseTile().y].setName("tower");
-                funds-=20;//tower cost
+                funds-=tower->getCost();//tower cost
             }
         }
         break;

@@ -174,7 +174,7 @@ int main()
                     }
                 }
 
-                tower->Update(deltaTime, window_Width, window_Height, funds);
+                tower->Update(deltaTime, window_Width, window_Height, funds,mouseObject.getStatus());
                 tower->Draw();
             }
         }
