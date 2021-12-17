@@ -47,6 +47,15 @@ void Enemy::CalculateDirection(int index)
 {
     direction = Vector2Subtract(waypoints[index], position);
     direction = Vector2Normalize(direction);
+    if(direction.x >= 0.9 && direction.y<=0.1){ //RECHTS
+        rotation=270;
+    } else if(direction.x <= -0.9 && direction.y<=0.1){ //LINKS
+        rotation=90;
+    } else if(direction.y >= 0.9 && direction.x<=0.1){ //DOWN
+        rotation=0;
+    } else if(direction.y <= -0.9 && direction.y<=0.1){ //UP
+        rotation=180;
+    }
 }
 
 void Enemy::Draw()
@@ -54,7 +63,8 @@ void Enemy::Draw()
     // todo texture width and height replace
     if (waypointIndex < 8)
     {
-        DrawRectangle(position.x +18, position.y+18, 30, 30, RED);
+        DrawTexturePro(texture, {0, 0, 32, 32}, {position.x+32, position.y+32, static_cast<float>(texture.width*2),static_cast<float>(texture.height*2)}, {32, 32}, rotation, WHITE);  
+        //DrawRectangle(position.x +18, position.y+18, 30, 30, RED);
 
         //healtbar
         DrawRectangle(position.x + 18, position.y + 5, 30, 5, RED);

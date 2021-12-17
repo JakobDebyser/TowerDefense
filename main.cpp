@@ -128,7 +128,7 @@ int main()
         {
 
             spawnTimer += deltaTime;
-            if (difficultyLevel % 3 == 0)
+            if (difficultyLevel % 10 == 0)
             {
                 // spawn boss
             }
@@ -194,7 +194,7 @@ int main()
         }
 
         // MENU
-        if (funds >= basicTower.getTowerCost() && funds > 0)
+        if (funds >= basicTower.getTowerCost())
         {
             if (basicTower.isClicked())
             {

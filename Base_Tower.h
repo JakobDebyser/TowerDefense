@@ -39,7 +39,7 @@ private:
     float bulletTimer{0.0f};
     Upgrade_Button upgrade_button{};
     int cost{20};
-    
+    int towerLevel{1};
     
 };
 

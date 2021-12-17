@@ -11,7 +11,7 @@ void MouseObject::Update(float deltaTime, Tile tiles[12][12],vector<base_tower *
     switch (status.value())
     {
     case 0: // BUILDING BASIC TOWER
-        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)&& getMouseTile().x<12&&funds>0)
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)&& getMouseTile().x<12&&funds>=20)
         {
             string grass = "grass";
             if (tiles[(int)getMouseTile().x][(int)getMouseTile().y].getName() == grass)

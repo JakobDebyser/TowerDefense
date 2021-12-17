@@ -11,11 +11,10 @@ public:
     Upgrade_Button();
     void setIsVisible(bool visible);
     bool isVisible() { return visible; }
-    void Draw();
-    void update();
+    void update(float deltaTime);
 
 protected:
-    Texture2D texture;
+    Texture2D texture{LoadTexture("textures/upgradeButton.png")};
     Vector2 position;
     Rectangle collisionRect;
     mouseStatus status{};

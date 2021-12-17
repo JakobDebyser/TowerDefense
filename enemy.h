@@ -18,7 +18,7 @@ public:
     int getReward() { return reward;}
 
 private:
-    Texture2D texture{};
+    Texture2D texture{LoadTexture("textures/enemy.png")};
     Vector2 position{};
     Vector2 direction{};
     Rectangle collisionRect{};
@@ -31,6 +31,7 @@ private:
     int waypointIndex{0};
     bool Alive{true};
     int reward{5};
+    float rotation{0};
 };
 
 #endif // _ENEMY_
