@@ -37,7 +37,7 @@ private:
     vector<Bullet*> bullets;
     bool hasTarget{};
     float bulletTimer{0.0f};
-    Upgrade_Button upgrade_button{};
+    Upgrade_Button upgrade_button{LoadTexture("textures/upgradeButton.png"),{770,708}};
     int cost{20};
     int towerLevel{1};
     
