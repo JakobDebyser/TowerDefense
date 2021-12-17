@@ -17,14 +17,14 @@ int main()
     // TODO: variabelen in juiste/logische volgorde zetten
     float window_Width{1024};
     float window_Height{768};
-    int funds{100};
+    int funds{60};
     int max_lives{5};
     int current_lives = max_lives;
     InitWindow(window_Width, window_Height, "TowerDefense");
     Texture2D WorldMap = LoadTexture("textures/testmap.png");
     Texture2D towerTexture = LoadTexture("textures/tower.png");
     Texture2D NextWave = LoadTexture("textures/nextWave.png");
-    Texture2D basicTowerButtonTexture = LoadTexture("textures/nextWave.png"); // texture vervangen
+    Texture2D basicTowerButtonTexture = LoadTexture("textures/tower.png"); // texture vervangen
     const int scale = 2;
     const float rotation{0};
     const Vector2 Map_position{0, 0};
@@ -96,6 +96,7 @@ int main()
             EndDrawing();
             continue;
         }
+
         /*
         for (int x{0}; x < 12; x++)
         {
@@ -104,7 +105,7 @@ int main()
                 tiles[x][y].Draw();
             }
         }*/
-        if (start.isClicked())
+        if (start.isClicked()&&mouseObject.getStatus()==mouseStatus::IDLE)
         {
             text_timer = 0;
             showLevel = true;
@@ -125,16 +126,26 @@ int main()
         }
         if (spawningEnemies)
         {
+
             spawnTimer += deltaTime;
-            if (spawnTimer >= 1 && spawnCount < 6)
+            if (difficultyLevel % 3 == 0)
             {
-                spawnTimer = 0;
-                enemies.push_back(new Enemy());
-                spawnCount++;
-                if (spawnCount >= 6)
+                // spawn boss
+            }
+            else
+            {
+                if (spawnTimer >= 1 && spawnCount < 6)
                 {
-                    spawningEnemies = false;
-                    difficultyLevel++;
+                    spawnTimer = 0;
+
+                    enemies.push_back(new Enemy(difficultyLevel));
+
+                    spawnCount++;
+                    if (spawnCount >= 6)
+                    {
+                        spawningEnemies = false;
+                        
+                    }
                 }
             }
         }
@@ -177,7 +188,7 @@ int main()
                     }
                 }
 
-                tower->Update(deltaTime, window_Width, window_Height, funds,mouseObject.getStatus());
+                tower->Update(deltaTime, window_Width, window_Height, funds, mouseObject.getStatus());
                 tower->Draw();
             }
         }

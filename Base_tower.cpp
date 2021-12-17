@@ -8,7 +8,7 @@
 
 void base_tower::Draw()
 {
-    DrawTextureEx(texture, position, rotation, scale, WHITE);
+    DrawTexturePro(texture,collisionRect,{position.x+32, position.y+32,texture.width*scale,texture.height*scale},{32,32},rotation,WHITE);
     if (isClicked)
     {
         DrawCircleLines(position.x + 32, position.y + 32, range, YELLOW);
@@ -44,6 +44,7 @@ void base_tower::Update(float deltaTime, float window_Width, float window_Height
         }
     }
 
+
     bulletTimer += deltaTime;
     if (hasTarget)
     {
@@ -53,6 +54,7 @@ void base_tower::Update(float deltaTime, float window_Width, float window_Height
             bullets.push_back(new Bullet({position.x, position.y}, bulletDirection, target));
             bulletTimer = 0.0f;
         }
+        rotation= Vector2Angle(position,target->getPosition())+180;
     }
     int bulletIndex{0};
     for (auto bullet : bullets)
@@ -67,7 +69,7 @@ void base_tower::Update(float deltaTime, float window_Width, float window_Height
             {
                 target = {};
                 hasTarget = false;
-                funds+=10;
+                funds+=bullet->GetTarget()->getReward();
 
             }
         }
@@ -85,11 +87,13 @@ base_tower::base_tower(Texture2D tex, Vector2 pos)
     position = pos;
     range = 128;
     power = 1;
+    collisionRect={0,0,static_cast<float>(tex.width),static_cast<float>(tex.height)};
 }
 base_tower::base_tower(Vector2 pos) : texture{LoadTexture("textures/tower.png")}, position{pos}
 {
     range = 128;
     power = 1;
+    collisionRect={0,0,static_cast<float>(texture.width),static_cast<float>(texture.height)};
 }
 void base_tower::setTarget(Enemy *enemy)
 {

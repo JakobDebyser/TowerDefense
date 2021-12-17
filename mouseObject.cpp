@@ -41,7 +41,12 @@ void MouseObject::Draw()
     switch (status.value())
     {
     case 0: // BUILDING BASIC TOWER
-        DrawRectangle(floor(GetMouseX() / 64) * 64 + 20, floor(GetMouseY() / 64) * 64 + 20, 32, 32, WHITE);
+        DrawTextureEx(texture,
+        {static_cast<float>(floor(GetMouseX() / 64) * 64),static_cast<float>(floor(GetMouseY() / 64) * 64)  },
+        rotation,
+        scale,
+        {255,255,255,128});
+       // DrawRectangle(floor(GetMouseX() / 64) * 64 + 20, floor(GetMouseY() / 64) * 64 + 20, 32, 32, WHITE);
         break;
 
     default:

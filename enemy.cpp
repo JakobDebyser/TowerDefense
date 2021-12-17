@@ -2,18 +2,27 @@
 #include "raymath.h"
 #include <math.h>
 
-Enemy::Enemy() : position{64, -64},
+Enemy::Enemy(int difficultyLevel) : position{64, -64},
                  speed{100},
-                 health{2},
-                 maxHealth{2}
+                 health{difficultyLevel},
+                 maxHealth{difficultyLevel}
 
 {
     // collisionRect={static_cast<float>(texture.width),static_cast<float>(texture.height)};
     collisionRect = {position.x, position.y, 30.f, 30.f};
+    if (difficultyLevel%5==0){
+        speed+=25*difficultyLevel/5;
+    }
+    if (difficultyLevel%2==0){
+            reward+=5*difficultyLevel/2;
+    }
+    
 }
 
 void Enemy::Update(float deltaTime, int &lives)
 {
+    
+    
 
     collisionRect = {position.x, position.y, 30.f, 30.f};
 

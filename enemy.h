@@ -5,7 +5,7 @@
 class Enemy
 {
 public:
-    Enemy();
+    Enemy(int difficultyLevel);
     Vector2 getPosition() { return position; }
     int getSpeed() { return speed; }
     int getHealth() { return health; }
@@ -15,6 +15,7 @@ public:
     Rectangle getCollisionRect() { return collisionRect; };
     void takeDamage(int damage);
     bool IsAlive() { return Alive; }
+    int getReward() { return reward;}
 
 private:
     Texture2D texture{};
@@ -29,6 +30,7 @@ private:
     void CalculateDirection(int index);
     int waypointIndex{0};
     bool Alive{true};
+    int reward{5};
 };
 
 #endif // _ENEMY_

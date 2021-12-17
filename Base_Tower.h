@@ -23,6 +23,8 @@ public:
     void Draw();
     Upgrade_Button getUpgradeButton() { return upgrade_button; }
     int getCost() { return cost; }
+    protected:
+    Rectangle collisionRect{};
 private:
     Texture2D texture{};
     int range{};
@@ -37,6 +39,7 @@ private:
     float bulletTimer{0.0f};
     Upgrade_Button upgrade_button{};
     int cost{20};
+    
     
 };
 
