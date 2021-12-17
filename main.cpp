@@ -79,6 +79,9 @@ int main()
         tiles[x][2].setName("road");
     }
     tiles[10][2].setName("base");
+    tiles[11][2].setName("road");
+    tiles[11][1].setName("road");
+    tiles[11][3].setName("road");
 
     SetTargetFPS(60);
     while (!WindowShouldClose())
@@ -93,14 +96,14 @@ int main()
             EndDrawing();
             continue;
         }
-
+        /*
         for (int x{0}; x < 12; x++)
         {
             for (int y{0}; y < 12; y++)
             {
                 tiles[x][y].Draw();
             }
-        }
+        }*/
         if (start.isClicked())
         {
             text_timer = 0;

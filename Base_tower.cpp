@@ -49,7 +49,7 @@ void base_tower::Update(float deltaTime, float window_Width, float window_Height
     {
         if (bulletTimer >= 1.0f)
         {
-            Vector2 bulletDirection = Vector2Normalize(Vector2Subtract(target->getPosition(), position));
+            Vector2 bulletDirection = Vector2Normalize(Vector2Subtract({target->getPosition().x + 16, target->getPosition().y+16}, position));
             bullets.push_back(new Bullet({position.x, position.y}, bulletDirection, target));
             bulletTimer = 0.0f;
         }
@@ -71,7 +71,7 @@ void base_tower::Update(float deltaTime, float window_Width, float window_Height
 
             }
         }
-        if (bullet->GetPosition().x < 0 || bullet->GetPosition().y < 0 || bullet->GetPosition().x > window_Width || bullet->GetPosition().y > window_Height-4*64)
+        if (bullet->GetPosition().x < 0 || bullet->GetPosition().y < 0 || bullet->GetPosition().y > window_Height || bullet->GetPosition().x > window_Width-4*64)
         {
             bullets.erase(bullets.begin() + bulletIndex);
         }
