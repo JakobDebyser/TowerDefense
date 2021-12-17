@@ -97,6 +97,7 @@ int main()
             EndDrawing();
             continue;
         }
+        
 
         /*
         for (int x{0}; x < 12; x++)
@@ -129,7 +130,7 @@ int main()
         {
 
             spawnTimer += deltaTime;
-            if (difficultyLevel % 1 == 0)
+            if (difficultyLevel % 5 == 0)
             {
                 if (spawnTimer >= 1 && spawnCount < 1)
                 {

@@ -54,6 +54,7 @@ void Enemy::Update(float deltaTime, int &lives)
             // TODO enemy reach base
             speed = 0;
             lives--;
+            Alive = false;
         }
     }
 }
