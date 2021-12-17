@@ -18,12 +18,27 @@ Enemy::Enemy(int difficultyLevel) : position{64, -64},
     }
     
 }
+Enemy::Enemy(Texture2D tex,int difficultyLevel) :texture(tex), position{64, -64},
+                 speed{100},
+                 health{difficultyLevel},
+                 maxHealth{difficultyLevel}
+
+{
+    // collisionRect={static_cast<float>(texture.width),static_cast<float>(texture.height)};
+    collisionRect = {position.x, position.y, 30.f, 30.f};
+    if (difficultyLevel%5==0){
+        speed+=25*difficultyLevel/5;
+    }
+    if (difficultyLevel%2==0){
+            reward+=5*difficultyLevel/2;
+    }
+    
+}
+
 
 void Enemy::Update(float deltaTime, int &lives)
 {
     
-    
-
     collisionRect = {position.x, position.y, 30.f, 30.f};
 
     CalculateDirection(waypointIndex);
@@ -47,13 +62,13 @@ void Enemy::CalculateDirection(int index)
 {
     direction = Vector2Subtract(waypoints[index], position);
     direction = Vector2Normalize(direction);
-    if(direction.x >= 0.9 && direction.y<=0.1){ //RECHTS
+    if(direction.x >= 0.9f && direction.y<=0.1f){ //RECHTS
         rotation=270;
-    } else if(direction.x <= -0.9 && direction.y<=0.1){ //LINKS
+    } else if(direction.x <= -0.9f && direction.y<=0.1f){ //LINKS
         rotation=90;
-    } else if(direction.y >= 0.9 && direction.x<=0.1){ //DOWN
+    } else if(direction.y >= 0.9f && direction.x<=0.1f){ //DOWN
         rotation=0;
-    } else if(direction.y <= -0.9 && direction.y<=0.1){ //UP
+    } else if(direction.y <= -0.9f && direction.y<=0.1f){ //UP
         rotation=180;
     }
 }

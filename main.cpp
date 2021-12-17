@@ -8,6 +8,7 @@
 #include "mouseObject.h"
 #include "mouseStatus.h"
 #include "Tile.h"
+#include "boss_enemy.h"
 #include <string>
 using std::string;
 using std::vector;
@@ -117,7 +118,7 @@ int main()
         {
 
             text_timer += deltaTime;
-            if (text_timer < 1)
+            if (text_timer < 2)
             {
                 string difficulty_string{"Level: "};
                 difficulty_string.append(to_string(difficultyLevel), 0, 3);
@@ -128,9 +129,22 @@ int main()
         {
 
             spawnTimer += deltaTime;
-            if (difficultyLevel % 10 == 0)
+            if (difficultyLevel % 1 == 0)
             {
-                // spawn boss
+                if (spawnTimer >= 1 && spawnCount < 1)
+                {
+                    spawnTimer = 0;
+
+                   enemies.push_back(new bossEnemy(LoadTexture("textures/boss.png"), difficultyLevel) );
+
+                    spawnCount++;
+                    if (spawnCount >= 1)
+                    {
+                        spawningEnemies = false;
+                        
+                    }
+                }
+                
             }
             else
             {

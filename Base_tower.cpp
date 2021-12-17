@@ -22,7 +22,7 @@ void base_tower::Draw()
         upgrade_button.Draw();
         string upgrade_string{"upgrade for: "};
         upgrade_string.append(to_string(50),0,2);
-        DrawText(upgrade_string.c_str(),780,725,30,BLACK);
+        DrawText(upgrade_string.c_str(),775,725,28,BLACK);
     }
 
     for (auto bullet : bullets)

@@ -6,19 +6,20 @@ class Enemy
 {
 public:
     Enemy(int difficultyLevel);
+    Enemy(Texture2D texture, int difficulty);
     Vector2 getPosition() { return position; }
     int getSpeed() { return speed; }
     int getHealth() { return health; }
     Vector2 getDestination() { return currentDestination; }
-    void Update(float deltaTime,int &lives);
-    void Draw();
+   virtual void Update(float deltaTime,int &lives);
+    virtual void Draw();
     Rectangle getCollisionRect() { return collisionRect; };
     void takeDamage(int damage);
     bool IsAlive() { return Alive; }
     int getReward() { return reward;}
 
-private:
-    Texture2D texture{LoadTexture("textures/enemy.png")};
+protected:
+   Texture2D texture{LoadTexture("textures/enemy.png")};
     Vector2 position{};
     Vector2 direction{};
     Rectangle collisionRect{};
