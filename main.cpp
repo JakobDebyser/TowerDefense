@@ -209,12 +209,12 @@ int main()
         mouseObject.Draw();
         string funds_string{"Funds: "};
         funds_string.append(to_string(funds), 0, 5);
-        DrawText(funds_string.c_str(), 770, 268, 40, BLACK);
+        DrawText(funds_string.c_str(), 780, 268, 40, BLACK);
         string lives_string{"Lives: "};
         lives_string.append(to_string(current_lives), 0, 3);
         lives_string.append(" / ");
         lives_string.append(to_string(max_lives), 0, 3);
-        DrawText(lives_string.c_str(), 770, 12, 40, BLACK);
+        DrawText(lives_string.c_str(), 780, 12, 40, BLACK);
 
         EndDrawing();
     }
