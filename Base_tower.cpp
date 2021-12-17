@@ -14,12 +14,15 @@ void base_tower::Draw()
         DrawCircleLines(position.x + 32, position.y + 32, range, YELLOW);
         string tower_range{"Range: "};
         tower_range.append(to_string(range), 0, 5);
-        DrawText(tower_range.c_str(), 770, 588, 40, BLACK);
+        DrawText(tower_range.c_str(), 780, 588, 40, BLACK);
         string tower_power{"Power: "};
         tower_power.append(to_string(power), 0, 5);
-        DrawText(tower_power.c_str(), 770, 652, 40, BLACK);
+        DrawText(tower_power.c_str(), 780, 652, 40, BLACK);
 
         upgrade_button.Draw();
+        string upgrade_string{"upgrade for: "};
+        upgrade_string.append(to_string(50),0,2);
+        DrawText(upgrade_string.c_str(),780,725,30,BLACK);
     }
 
     for (auto bullet : bullets)
